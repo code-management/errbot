@@ -1,70 +1,13 @@
-##########################################################################
-#                                                                        #
-#  This is the config-template for Err. This file should be copied and   #
-#  renamed to config.py, then modified as you see fit to run Err the way #
-#  you like it.                                                          #
-#                                                                        #
-#  As this is a regular Python file, note that you can do variable       #
-#  assignments and the likes as usual. This can be useful for example if #
-#  you use the same values in multiple places.                           #
-#                                                                        #
-#  Note: Various config options require a tuple to be specified, even    #
-#  when you are configuring only a single value. An example of this is   #
-#  the BOT_ADMINS option. Make sure you use a valid tuple here, even if  #
-#  you are only configuring a single item, else you will get errors.     #
-#  (So don't forget the trailing ',' in these cases)                     #
-#                                                                        #
-##########################################################################
-
+# FILE MANAGED BY PUPPET
 import logging
-
 ##########################################################################
 # Core Err configuration                                                 #
 ##########################################################################
 
-# BACKEND selection.
-# This configures the type of chat server you wish to use Errbot with.
-#
-# The current choices:
-
-# Debug backends to test your plugins manually:
-# 'Text'     - on the text console
-# 'Graphic'  - in a GUI window
-
-# Commercial backends:
-# 'Campfire' - see https://campfirenow.com/ (follow instructions from https://github.com/errbotio/err-backend-campfire)
-# 'Hipchat'  - see https://www.hipchat.com/
-# 'Slack'    - see https://slack.com/
-# 'Gitter'   - see https://gitter.im/ (follow instructions from https://github.com/errbotio/err-backend-gitter)
-
-# Open protocols:
-# 'TOX'      - see https://tox.im/ (follow instructions from https://github.com/errbotio/err-backend-tox)
-# 'IRC'      - for classic IRC or bridged services like https://gitter.im
-# 'XMPP'     - the Extensible Messaging and Presence Protocol (https://xmpp.org/)
-# 'Telegram' - cloud-based mobile and desktop messaging app with a focus
-#              on security and speed. (https://telegram.org/)
-
-# BACKEND = 'XMPP'  # defaults to XMPP
 BACKEND = '<%= $::errbot::backend %>'
-
-# STORAGE selection.
-# This configures the type of persistence you wish to use Errbot with.
-#
-# The current choices:
-
-# Debug:
-# 'Memory'        - local memory storage to test your bot in memory:
-
-# Filesystem:
-# 'Shelf'         - python shelf (default)
-
-# STORAGE = 'Shelf'  # defaults to filestorage (python shelf).
-
+STORAGE = '<%= $::errbot::storage_type %>'
 # BOT_EXTRA_STORAGE_PLUGINS_DIR = None  # extra search path to find custom storage plugins
-
-# The location where all of Err's data should be stored. Make sure to set
-# this to a directory that is writable by the user running the bot.
-BOT_DATA_DIR = '/var/lib/err'
+BOT_DATA_DIR = '<%= $::errbot::data_dir %>'
 
 ### Repos and plugins config.
 
@@ -134,9 +77,12 @@ BOT_ASYNC = True
 
 # The identity, or credentials, used to connect to a server
 BOT_IDENTITY = {
+    <% case $::errbot::backend { -%>
+        <% 'Slack': {-%> 'token': '<%= $::errbot::slack_token %>' <% }-%>
+    <%} -%>
     # XMPP (Jabber) mode
-    'username': 'err@localhost',  # The JID of the user you have created for the bot
-    'password': 'changeme',       # The corresponding password for this user
+    # 'username': 'err@localhost',  # The JID of the user you have created for the bot
+    # 'password': 'changeme',       # The corresponding password for this user
     # 'server': ('host.domain.tld',5222), # server override
 
     ## HipChat mode (Comment the above if using this mode)
@@ -183,14 +129,14 @@ BOT_ADMINS = ('gbin@localhost',)
 # should include the # sign here. For XMPP rooms that are password
 # protected, you can specify another tuple here instead of a string,
 # using the format (RoomName, Password).
-CHATROOM_PRESENCE = ('err@conference.server.tld',)
+CHATROOM_PRESENCE = ()
 
 # The FullName, or nickname, your bot should use. What you set here will
 # be the nickname that Err shows in chatrooms. Note that some XMPP
 # implementations, notably HipChat, are very picky about what name you
 # use. In the case of HipChat, make sure this matches exactly with the
 # name you gave the user.
-CHATROOM_FN = 'Err'
+CHATROOM_FN = '<%= $::errbot::bot_name %>'
 
 ##########################################################################
 # Prefix configuration                                                   #
