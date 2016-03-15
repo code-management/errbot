@@ -1,7 +1,8 @@
 # Class: errbot::setup
 # ===========================
 #
-# Setup environment for errbot.
+# Setup environment for errbot by installing Python, Virtualenv
+# and Pip if required, and creating a virtualenv
 #
 # Parameters
 # ----------

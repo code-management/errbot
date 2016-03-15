@@ -9,7 +9,6 @@
 class errbot::install (
 ) {
 
-
   python::pip { $::errbot::dependencies:
     ensure     => 'present',
     virtualenv => $::errbot::virtualenv_dir,
