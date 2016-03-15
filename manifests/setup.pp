@@ -30,7 +30,7 @@ class errbot::setup (
     }
   }
 
-  python::pyvenv { $::errbot::virtualenv_dir:
+  python::virtualenv { $::errbot::virtualenv_dir:
     ensure  => 'present',
     version => $::errbot::python_version,
     owner   => $::errbot::bot_user,
