@@ -4,10 +4,10 @@ import logging
 # Core Err configuration                                                 #
 ##########################################################################
 
-BACKEND = '<%= $::errbot::backend %>'
-STORAGE = '<%= $::errbot::storage_type %>'
+BACKEND = '<%= $errbot::backend %>'
+STORAGE = '<%= $errbot::storage_type %>'
 # BOT_EXTRA_STORAGE_PLUGINS_DIR = None  # extra search path to find custom storage plugins
-BOT_DATA_DIR = '<%= $::errbot::data_dir %>'
+BOT_DATA_DIR = '<%= $errbot::data_dir %>'
 
 ### Repos and plugins config.
 
@@ -77,9 +77,9 @@ BOT_ASYNC = True
 
 # The identity, or credentials, used to connect to a server
 BOT_IDENTITY = {
-    <% case $::errbot::backend { -%>
-        <% 'Slack': {-%> 'token': '<%= $::errbot::slack_token %>' <% }-%>
-    <%} -%>
+    <% if $errbot::backend == "Slack" { -%>
+        'token': '<%= $errbot::slack_token %>',
+    <% } -%>
     # XMPP (Jabber) mode
     # 'username': 'err@localhost',  # The JID of the user you have created for the bot
     # 'password': 'changeme',       # The corresponding password for this user
@@ -136,7 +136,7 @@ CHATROOM_PRESENCE = ()
 # implementations, notably HipChat, are very picky about what name you
 # use. In the case of HipChat, make sure this matches exactly with the
 # name you gave the user.
-CHATROOM_FN = '<%= $::errbot::bot_name %>'
+CHATROOM_FN = '<%= $errbot::bot_name %>'
 
 ##########################################################################
 # Prefix configuration                                                   #
