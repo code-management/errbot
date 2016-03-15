@@ -70,9 +70,9 @@ class errbot (
   validate_string($bot_name)
   # Python related Params
   validate_absolute_path($virtualenv_dir)
-  validate_boolean($manage_python)
-  validate_boolean($manage_pip)
-  validate_boolean($manage_virtualenv)
+  validate_bool($manage_python)
+  validate_bool($manage_pip)
+  validate_bool($manage_virtualenv)
 
   # Validate backend specific params
   if $backend == 'Slack' {
