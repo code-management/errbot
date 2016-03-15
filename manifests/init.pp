@@ -60,7 +60,7 @@ class errbot (
   $manage_python     = true,
   $manage_virtualenv = true,
   $manage_pip        = true,
-  $python_version    = 'python3.4',
+  $python_version    = '3.4',
   # Account and Chatroom params
   $bot_name          = 'errbot',
   $slack_token       = undef,
