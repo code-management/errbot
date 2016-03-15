@@ -63,10 +63,7 @@ class errbot (
   include ::errbot::params
 
   # Validate params - General
-  validate_string($backend)
-  if ! member($::errbot::params::valid_backends, $backend) {
-    fail("${backend} is not a valid errbot backend")
-  }
+  validate_string($backend)   # This is also validated in errbot::params, when solving backend specific deps
   validate_string($bot_name)
   # Python related Params
   validate_absolute_path($virtualenv_dir)
