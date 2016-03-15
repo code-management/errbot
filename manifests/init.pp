@@ -12,6 +12,12 @@
 # [*bot_name*]
 #   Name of this bot instance. Default: errbot
 #
+# [*bot_user*]
+#   Local user underwhich to run the errbot instance. Default: errbot
+#
+# [*manage_user*]
+#   Manage bot_user via Puppet. Default: true
+#
 # [*virtualenv_dir*]
 #   Path for the errbot virtualenv & config.py. Defaults to /opt/errbot
 #
@@ -47,6 +53,8 @@
 class errbot (
   $backend,
   $bot_name          = 'errbot',
+  $bot_user          = 'errbot',
+  $manage_user       = true,
 
   # Python related params
   $virtualenv_dir    = '/opt/errbot',
@@ -97,5 +105,7 @@ class errbot (
   include ::errbot::configure
 
   # Plugin Installation
+
+  # Errbot Service
 
 }
