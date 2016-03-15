@@ -53,6 +53,14 @@ task :contributors do
   system("git log --format='%aN' | sort -u > CONTRIBUTORS")
 end
 
+desc "Run syntax & lint tests"
+task :pretest => [
+    :metadata_lint,
+    :syntax,
+    :lint,
+    :rubocop,
+]
+
 desc "Run syntax, lint, and spec tests."
 task :test => [
   :metadata_lint,
