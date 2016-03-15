@@ -52,7 +52,6 @@
 #
 class errbot (
   $backend,
-  $bot_name          = 'errbot',
   $bot_user          = 'errbot',
   $manage_user       = true,
 
@@ -62,37 +61,47 @@ class errbot (
   $manage_virtualenv = true,
   $manage_pip        = true,
   $python_version    = 'python3.4',
-  # Backend Specific Params
+  # Account and Chatroom params
+  $bot_name          = 'errbot',
   $slack_token       = undef,
-  # Storage params
+  # Core Errbot params
   $data_dir          = '/opt/errbot/data',
   $storage_type      = 'Shelf',
+  # Prefix config params
+  # Access control & Message diversion params
+  # Misc Settings
 ) {
   include ::errbot::params
 
   # Validate params - General
   validate_string($backend)   # This is also validated in errbot::params, when solving backend specific deps
-  validate_string($bot_name)
   # Python related Params
   validate_absolute_path($virtualenv_dir)
   validate_bool($manage_python)
   validate_bool($manage_pip)
   validate_bool($manage_virtualenv)
 
-  # Validate backend specific params
+  # Account and Chatroom params
   if $backend == 'Slack' {
     if $slack_token == undef {
       fail('<slack_token> param is required when using Slack backend')
     }
     validate_string($slack_token)
   }
+  validate_string($bot_name)
 
-  # Storage params
+  # Core Errbot Params
   validate_absolute_path($data_dir)
   validate_string($storage_type)
   if ! member($::errbot::params::valid_storage_types, $storage_type) {
     fail("${storage_type} is not a valid storage type")
   }
+
+  # Prefix Config params
+
+  # Access Control and message diversion params
+
+  # Misc Settings
 
 
   # Setup environment
