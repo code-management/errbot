@@ -12,7 +12,7 @@ class errbot::configure (
 
   file { "${::errbot::virtualenv_dir}/config.py":
     ensure  => 'present',
-    content => template('errbot/config.py.epp'),
+    content => epp('errbot/config.py.epp'),
     owner   => $::errbot::user,
   }
 }
