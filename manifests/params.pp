@@ -15,14 +15,15 @@ class errbot::params {
 
   # Dependencies based on backend selection
   case $::errbot::backend {
-    'XMPP':    { $backend_dependencies = ['sleekxmpp', 'pyasn1', 'pyasn1-modules', 'dnspython3']}             #TODO This is dnspython for Python2 :/
-    'Hipchat': { $backend_dependencies = ['sleekxmpp', 'pyasn1', 'pyasn1-modules', 'dnspython3', 'hypchat']}  #TODO This is dnspython for Python2 :/
+    'XMPP':    { $backend_dependencies = ['sleekxmpp', 'pyasn1', 'pyasn1-modules', ]}
+    'Hipchat': { $backend_dependencies = ['sleekxmpp', 'pyasn1', 'pyasn1-modules', 'hypchat']}
     'IRC':     { $backend_dependencies = ['irc'] }
     'Slack':   { $backend_dependencies = ['slackclient'] }
+    'Telegram':{ $backend_dependencies = ['python-telegram-bot'] }
 
-    'Text', 'Graphic', 'Campfire', 'Glitter', 'TOX', 'Telegram': {
+    'Text', 'Graphic', 'Campfire', 'Glitter', 'TOX': {
       $backend_dependencies = []
     }
-    default:   { fail("${::errbot::backend} is not currently a supported backend")}
+    default:   { warn("${::errbot::backend} is not a supported backend. Proceed with caution.")}
   }
 }
