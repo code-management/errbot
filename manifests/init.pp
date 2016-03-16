@@ -30,11 +30,23 @@
 # [*manage_pip*]
 #   Whether this module should install pip. Default: true
 #
+# [*addtional_packages*]
+#   Any additonal pip packages you want to be installed into the
+#   virtualenv
+#
 # [*python_version*]
 #   Python version to use for errbot's virtualenv. Default: python3.4
 #
-# [*slack_token*]
-#   Token to use when using the Slack backend
+# [*bot_credentials*]
+#   Hash used to configure the bot's credentials in config.py.
+#   The keys & values depend on the backend being used. For example,
+#   hosted Slack, Telegram and Hipchat backends use a hash as below:
+#     bot_credentials => {
+#       token => 'foobar'
+#     }
+#   In contrast, XMPP & IRC a username & password, as well as server
+#   settings. Refer to the errbot docs for details on your specific backend.
+#     http://errbot.io/en/latest/user_guide/setup.html#configuration
 #
 # [*data_dir*]
 #   Data directory for errbot. Defaults to /opt/errbot/data
@@ -47,26 +59,28 @@
 #
 # class { 'errbot':
 #   backend     => 'slack',
-#   slack_token => 'x090809-....',
-# }
+#   bot_credentials => {
+#     token => 'x097897...',
+#   }
 #
 class errbot (
   $backend,
-  $bot_user          = 'errbot',
-  $manage_user       = true,
+  $bot_user           = 'errbot',
+  $manage_user        = true,
 
   # Python related params
-  $virtualenv_dir    = '/opt/errbot',
-  $manage_python     = true,
-  $manage_virtualenv = true,
-  $manage_pip        = true,
-  $python_version    = 'system',
+  $virtualenv_dir     = '/opt/errbot',
+  $manage_python      = true,
+  $manage_virtualenv  = true,
+  $manage_pip         = true,
+  $python_version     = 'system',
+  $addtional_packages = [],
   # Account and Chatroom params
-  $bot_name          = 'errbot',
-  $slack_token       = undef,
+  $bot_name           = 'errbot',
+  $bot_credentials,
   # Core Errbot params
-  $data_dir          = '/opt/errbot/data',
-  $storage_type      = 'Shelf',
+  $data_dir           = '/opt/errbot/data',
+  $storage_type       = 'Shelf',
   # Prefix config params
   # Access control & Message diversion params
   # Misc Settings
@@ -82,8 +96,8 @@ class errbot (
   validate_bool($manage_virtualenv)
 
   # Account and Chatroom params
-  if $backend == 'Slack' {
-    if $slack_token == undef {
+  if $backend == 'Slack' or $backend == 'Telegram' {
+    if $token == undef {
       fail('<slack_token> param is required when using Slack backend')
     }
     validate_string($slack_token)
