@@ -33,7 +33,7 @@
 # [*manage_pip*]
 #   Whether this module should install pip. Default: true
 #
-# [*addtional_packages*]
+# [*additional_packages*]
 #   Any additonal pip packages you want to be installed into the
 #   virtualenv
 #
@@ -76,28 +76,28 @@
 #
 class errbot (
   $backend,
-  $bot_user           = 'errbot',
-  $manage_user        = true,
+  $bot_user            = 'errbot',
+  $manage_user         = true,
 
   # Python related params
-  $virtualenv_dir     = '/opt/errbot',
-  $manage_python      = true,
-  $manage_python_dev  = true,
-  $manage_virtualenv  = true,
-  $manage_pip         = true,
-  $python_version     = 'system',
-  $addtional_packages = [],
+  $virtualenv_dir      = '/opt/errbot',
+  $manage_python       = true,
+  $manage_python_dev   = true,
+  $manage_virtualenv   = true,
+  $manage_pip          = true,
+  $python_version      = 'system',
+  $additional_packages = [],
   # Account and Chatroom params
-  $bot_name           = 'errbot',
+  $bot_name            = 'errbot',
   $bot_credentials,
   $bot_admins,
   # Core Errbot params
-  $data_dir           = '/opt/errbot/data',
-  $storage_type       = 'Shelf',
+  $data_dir            = '/opt/errbot/data',
+  $storage_type        = 'Shelf',
   # Prefix config params
   # Access control & Message diversion params
   # Misc Settings
-  $config_hash        = {}
+  $config_hash         = {}
 ) {
   include ::errbot::params
 
