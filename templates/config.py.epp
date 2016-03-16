@@ -283,3 +283,8 @@ REVERSE_CHATROOM_RELAY = {}
 
 # Prevent ErrBot from saying anything if the command is unrecognized.
 # SUPPRESS_CMD_NOT_FOUND = False
+
+# Additional settings passed as config_hash to puppet
+<% $::errbot::config_hash.each | String $key, String $value | { -%>
+<%= $key %>= '<%= $value %>',
+<% } -%>

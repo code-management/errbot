@@ -61,6 +61,9 @@
 # [*storage_type*]
 #   Storage type to use. Defaults to 'Shelf'
 #
+# [*config_hash*]
+#   Any additional variables to set in config.py.]
+#
 # Example
 # -------
 #
@@ -93,6 +96,7 @@ class errbot (
   # Prefix config params
   # Access control & Message diversion params
   # Misc Settings
+  $config_hash        = {}
 ) {
   include ::errbot::params
 
@@ -106,6 +110,7 @@ class errbot (
   validate_bool($manage_virtualenv)
 
   # Account and Chatroom params
+  validate_hash($bot_credentials)
   if member(['Slack', 'Telegram'], $backend) {
     if ! member(keys($bot_credentials),'token') {
       fail("Failed to find 'token' key in <bot_credentials>, required when using ${backend} backend")
@@ -127,7 +132,7 @@ class errbot (
   # Access Control and message diversion params
 
   # Misc Settings
-
+  validate_hash($config_hash)
 
   Class['::errbot::setup'] -> Class['::errbot::install'] -> Class['::errbot::configure']
 
