@@ -72,6 +72,7 @@
 #   bot_credentials => {
 #     token => 'x097897...',
 #   }
+# }
 #
 class errbot (
   $backend,
