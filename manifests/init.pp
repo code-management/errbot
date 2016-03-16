@@ -62,7 +62,8 @@
 #   Storage type to use. Defaults to 'Shelf'
 #
 # [*config_hash*]
-#   Any additional variables to set in config.py.]
+#   Any additional variables to set in config.py. Keys in the hash
+#   should be 'strings'.
 #
 # Example
 # -------

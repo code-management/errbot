@@ -286,5 +286,5 @@ REVERSE_CHATROOM_RELAY = {}
 
 # Additional settings passed as config_hash to puppet
 <% $::errbot::config_hash.each | String $key, String $value | { -%>
-<%= $key %>= '<%= $value %>',
+<%= upcase($key) %> = '<%= $value %>',
 <% } -%>
