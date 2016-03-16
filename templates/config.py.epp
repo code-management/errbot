@@ -285,6 +285,11 @@ REVERSE_CHATROOM_RELAY = {}
 # SUPPRESS_CMD_NOT_FOUND = False
 
 # Additional settings passed as config_hash to puppet
-<% $::errbot::config_hash.each | String $key, String $value | { -%>
+<% $::errbot::config_hash.each | String $key, $value | { -%>
+<% if is_bool($value) { -%>
+<%= upcase($key) %> = <%= capitalize(bool2str($value)) -%>,
+<% } else { -%>
 <%= upcase($key) %> = '<%= $value %>',
 <% } -%>
+<% } -%>
+

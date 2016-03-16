@@ -63,7 +63,11 @@
 #
 # [*config_hash*]
 #   Any additional variables to set in config.py. Keys in the hash
-#   should be 'strings'.
+#   should be 'strings'. Values may be strings, or bools. Example:
+#   config_hash => {
+#      'FOO_SETTING' => 'bar',
+#      'BAR_ENABLED' => true,
+#   }
 #
 # Example
 # -------
