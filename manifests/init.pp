@@ -102,7 +102,7 @@ class errbot (
 
   # Account and Chatroom params
   if member(['Slack', 'Telegram'], $backend) {
-    if member(keys($bot_credentials),'token') {
+    if ! member(keys($bot_credentials),'token') {
       fail("Failed to find 'token' key in <bot_credentials>, required when using ${backend} backend")
     }
   }
