@@ -156,7 +156,10 @@ class errbot (
   # Errbot Service
   service { 'errbot':
     ensure   => 'running',
-    provider => 'init',
+    start    => '/etc/init.d/errbot start',
+    stop     => '/etc/init.d/errbot stop',
+    status   => '/etc/init.d/errbot status',
+    provider => 'base',
   }
 
 }
