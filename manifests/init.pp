@@ -48,6 +48,10 @@
 #   settings. Refer to the errbot docs for details on your specific backend.
 #     http://errbot.io/en/latest/user_guide/setup.html#configuration
 #
+# [*bot_admins*]
+#   List of strings for bot admins. Format of strings depends on backend.
+#   For exmaple, Slack backend uses '@username' strings.
+#
 # [*data_dir*]
 #   Data directory for errbot. Defaults to /opt/errbot/data
 #
@@ -78,6 +82,7 @@ class errbot (
   # Account and Chatroom params
   $bot_name           = 'errbot',
   $bot_credentials,
+  $bot_admins,
   # Core Errbot params
   $data_dir           = '/opt/errbot/data',
   $storage_type       = 'Shelf',
@@ -96,13 +101,14 @@ class errbot (
   validate_bool($manage_virtualenv)
 
   # Account and Chatroom params
-  if $backend == 'Slack' or $backend == 'Telegram' {
-    if $token == undef {
-      fail('<slack_token> param is required when using Slack backend')
+  if member(['Slack', 'Telegram'], $backend) {
+    if member(keys($bot_credentials),'token') {
+      fail("Failed to find 'token' key in <bot_credentials>, required when using ${backend} backend")
     }
-    validate_string($slack_token)
   }
+  #TODO: Validate bot_credentials for other backends
   validate_string($bot_name)
+  validate_array($bot_admins)
 
   # Core Errbot Params
   validate_absolute_path($data_dir)
