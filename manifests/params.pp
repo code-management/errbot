@@ -29,8 +29,8 @@ class errbot::params {
 
   # OS Package Dependencies
   case $::facts['operatingsystem'] {
-    'RedHat', 'CentOS', 'Fedora': { $dependencies = ['libffi-devel']}
-    /^(Debian|Ubuntu)$/:          { $dependencies = ['libffi-dev']}
+    'RedHat', 'CentOS', 'Fedora': { $dependencies = ['libffi-devel', 'openssl-devel']}
+    /^(Debian|Ubuntu)$/:          { $dependencies = ['libffi-dev', 'libssl-dev']}
     default: { warn("Unrecognized OS ${::facts['operatingsystem']}. You may need to install dependencies manually")}
   }
 }
