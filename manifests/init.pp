@@ -141,7 +141,7 @@ class errbot (
   validate_hash($config_hash)
 
   Class['::errbot::setup'] -> Class['::errbot::install'] -> Class['::errbot::configure']
-
+  Class['::errbot::configure'] ~> Service['errbot']
   # Setup environment
   include ::errbot::setup
 
@@ -154,5 +154,9 @@ class errbot (
   # Plugin Installation
 
   # Errbot Service
+  service { 'errbot':
+    ensure   => 'running',
+    provider => 'init',
+  }
 
 }

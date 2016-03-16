@@ -15,4 +15,10 @@ class errbot::configure (
     content => epp('errbot/config.py.epp'),
     owner   => $::errbot::bot_user,
   }
+
+  file { '/etc/init.d/errbot':
+    ensure  => 'present',
+    mode    => '0755',
+    content => epp('errbot/errbot_init.epp'),
+  }
 }
