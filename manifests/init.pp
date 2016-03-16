@@ -24,6 +24,9 @@
 # [*manage_python*]
 #   Whether this module should install Python. Default: true
 #
+# [*manage_python_dev*]
+#   Whether this module should install python-dev packages. Default: true
+#
 # [*manage_virtualenv*]
 #   Whether this module should install python-venv. Default: true
 #
@@ -75,6 +78,7 @@ class errbot (
   # Python related params
   $virtualenv_dir     = '/opt/errbot',
   $manage_python      = true,
+  $manage_python_dev  = true,
   $manage_virtualenv  = true,
   $manage_pip         = true,
   $python_version     = 'system',
@@ -97,6 +101,7 @@ class errbot (
   # Python related Params
   validate_absolute_path($virtualenv_dir)
   validate_bool($manage_python)
+  validate_bool($manage_python_dev)
   validate_bool($manage_pip)
   validate_bool($manage_virtualenv)
 

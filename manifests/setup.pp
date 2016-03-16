@@ -26,6 +26,7 @@ class errbot::setup (
       ensure     => 'present',
       version    => $::errbot::python_version,
       pip        => $::errbot::manage_pip,
+      dev        => $::errbot::manage_python_dev,
       virtualenv => $::errbot::manage_virtualenv,
     }
   }
