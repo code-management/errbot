@@ -124,6 +124,8 @@ class errbot (
   # Misc Settings
 
 
+  Class['::errbot::setup'] -> Class ['::errbot::install'] -> Class['::errbot::configure']
+
   # Setup environment
   include ::errbot::setup
 
