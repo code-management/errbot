@@ -12,6 +12,12 @@
 class errbot::setup (
 ) {
 
+  if $::errbot::params::dependencies {
+    package { $::errbot::params::dependencies:
+      ensure => 'installed',
+    }
+  }
+
   if $::errbot::manage_user {
     user { $::errbot::bot_user:
       ensure     => 'present',

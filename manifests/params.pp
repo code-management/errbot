@@ -26,4 +26,11 @@ class errbot::params {
     }
     default:   { warn("${::errbot::backend} is not a supported backend. Proceed with caution.")}
   }
+
+  # OS Package Dependencies
+  case $::facts['operatingsystem'] {
+    'RedHat', 'CentOS', 'Fedora': { $dependencies = ['libffi-devel']}
+    /^(Debian|Ubuntu)$/:          { $dependencies = ['libffi-dev']}
+    default: { warn("Unrecognized OS ${::facts['operatingsystem']}. You may need to install dependencies manually")}
+  }
 }
