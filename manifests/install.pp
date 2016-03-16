@@ -9,21 +9,28 @@
 class errbot::install (
 ) {
 
-  python::pip { $::errbot::additional_packages:
-    ensure     => 'present',
-    virtualenv => $::errbot::virtualenv_dir,
+  # Install user specified packages, if requested
+  if $::errbot::additional_packages {
+    python::pip { $::errbot::additional_packages:
+      ensure     => 'present',
+      virtualenv => $::errbot::virtualenv_dir,
+      before     => Python::Pip['errbot'],
+    }
   }
 
-
-  python::pip { $::errbot::params::backend_dependencies:
-    ensure     => 'present',
-    virtualenv => $::errbot::virtualenv_dir,
+  # Install backend dependencies, if any exist
+  if $::errbot::params::backend_dependencies {
+    python::pip { $::errbot::params::backend_dependencies:
+      ensure     => 'present',
+      virtualenv => $::errbot::virtualenv_dir,
+      before     => Python::Pip['errbot'],
+    }
   }
 
+  # Install errbot
   python::pip { 'errbot':
     ensure     => 'present',
     virtualenv => $::errbot::virtualenv_dir,
-    require    => Python::Pip[$::errbot::dependencies],
   }
 
 }
