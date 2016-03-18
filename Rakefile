@@ -54,11 +54,6 @@ task :contributors do
   system("git log --format='%aN' | sort -u > CONTRIBUTORS")
 end
 
-desc "Generate documentation"
-task :doc => [
-    strings:generate,
-]
-
 desc "Run syntax & lint tests"
 task :pretest => [
     :metadata_lint,
