@@ -5,6 +5,7 @@ require 'puppetlabs_spec_helper/rake_tasks'
 require 'puppet/version'
 require 'puppet/vendor/semantic/lib/semantic' unless Puppet.version.to_f < 3.6
 require 'puppet-lint/tasks/puppet-lint'
+require 'puppet-strings/rake_tasks'
 require 'puppet-syntax/tasks/puppet-syntax'
 require 'metadata-json-lint/rake_task'
 require 'rubocop/rake_task'
@@ -52,6 +53,11 @@ desc "Populate CONTRIBUTORS file"
 task :contributors do
   system("git log --format='%aN' | sort -u > CONTRIBUTORS")
 end
+
+desc "Generate documentation"
+task :doc => [
+    strings:generate,
+]
 
 desc "Run syntax & lint tests"
 task :pretest => [
