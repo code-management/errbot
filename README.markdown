@@ -1,7 +1,9 @@
 [![Build
 Status](https://travis-ci.org/code-management/errbot.svg?branch=master)](https://travis-ci.org/code-management/errbot)
 
-*README & Documentation currently in progress*
+** There be dragons. **
+This module is still under active development, and to be considered incomplete at this time. 
+It's entirely possible that it might steal your car and sell it to the mafia.
 
 #### Table of Contents
 
