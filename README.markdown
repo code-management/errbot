@@ -1,6 +1,7 @@
 [![Build
 Status](https://travis-ci.org/code-management/errbot.svg?branch=master)](https://travis-ci.org/code-management/errbot)
 
+*README & Documentation currently in progress*
 
 #### Table of Contents
 
