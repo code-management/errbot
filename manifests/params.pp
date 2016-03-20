@@ -7,6 +7,8 @@
 # Should not be used directly.
 #
 class errbot::params {
+  # Default parameter values
+  $virtualenv_dir = '/opt/errbot'
 
   # Parameter validation
   $valid_storage_types = [
@@ -14,7 +16,7 @@ class errbot::params {
   ]
 
   # Dependencies based on backend selection
-  case $::errbot::backend {
+  case $::errbot::config::backend {
     'XMPP':    { $backend_dependencies = ['sleekxmpp', 'pyasn1', 'pyasn1-modules', ]}
     'Hipchat': { $backend_dependencies = ['sleekxmpp', 'pyasn1', 'pyasn1-modules', 'hypchat']}
     'IRC':     { $backend_dependencies = ['irc'] }
@@ -24,7 +26,7 @@ class errbot::params {
     'Text', 'Graphic', 'Campfire', 'Glitter', 'TOX': {
       $backend_dependencies = []
     }
-    default:   { warn("${::errbot::backend} is not a supported backend. Proceed with caution.")}
+    default:   { warn("${::errbot::config::backend} is not a supported backend. Proceed with caution and specify additional dependencies yourself.")}
   }
 
   # OS Package Dependencies

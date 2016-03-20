@@ -19,7 +19,7 @@ class errbot::setup (
     }
   }
 
-  if $::errbot::manage_user {
+  if $::errbot::manage_bot_user {
     user { $::errbot::bot_user:
       ensure     => 'present',
       managehome => true,

@@ -2,6 +2,7 @@
 # ===========================
 #
 # Install errbot and dependencies
+# Should be considered private and not used directly.
 #
 # Parameters
 # ----------
