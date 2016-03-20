@@ -5,6 +5,7 @@
 # and Pip if required, and creating a virtualenv.
 #
 # Also handles creation of bot_user, if manage_user is true.
+# Should be considered private and not used directly.
 #
 # Parameters
 # ----------

@@ -2,6 +2,7 @@
 # ===========================
 #
 # Class for configuring errbot instance via config.py
+# Should be considered private and not used directly.
 #
 # Parameters
 # ----------
