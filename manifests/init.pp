@@ -63,7 +63,12 @@ class errbot (
   validate_bool($manage_pip)
   validate_bool($manage_virtualenv)
 
+  if defined(Class['::errbot::config']) and defined($::errbot::config_file) {
+    fail('The errbot::config class cannot be used when specifying a config file via the config_file parameter.')
+  }
+
   Class['::errbot::setup'] -> Class['::errbot::install'] -> File["${::errbot::virtualenv_dir}/config.py"]
+  Class['::errbot::config::service'] -> Service['errbot']
   File["${::errbot::virtualenv_dir}/config.py"] ~> Service['errbot']
   # Setup environment
   include ::errbot::setup
@@ -73,6 +78,10 @@ class errbot (
 
   # Configure errbot service
   include ::errbot::config::service
+
+  if defined($::errbot::config_file) {
+    include ::errbot::config::config_file
+  }
 
   # Plugin Installation
 
