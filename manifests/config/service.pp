@@ -7,7 +7,7 @@
 # Parameters
 # ----------
 #
-class errbot::configure (
+class errbot::config::service (
 ) {
 
   file { '/etc/init.d/errbot':
