@@ -3,6 +3,7 @@ Status](https://travis-ci.org/code-management/errbot.svg?branch=master)](https:/
 
 ** There be dragons. **
 This module is still under active development, and to be considered incomplete at this time. 
+Documentation may be out of date, or completely wrong.
 It's entirely possible that it might steal your car and sell it to the mafia.
 
 #### Table of Contents
@@ -26,10 +27,11 @@ Puppet module to deploy and manage an [errbot](https://github.com/errbotio/errbo
 ## Usage
 
 ```
-    class { 'errbot':
-        backend    => 'slack',
-        bot_name   => 'mybot',
-        bot_admins => ['@scary_admin'],
+    include errbot
+
+    class { 'errbot::config':
+        backend         => 'Slack',
+        bot_admins      => ['@scary_admin'],
         bot_credentials => {
             token => 'xosbb--dummy_token123456',   
         }
@@ -54,9 +56,6 @@ The following parameters are available in `errbot`:
 
 ## Limitations
 * Cannot currently managing errbot plugins
-* Deploys errbot using Python2, rather than Python3
-* Not all configuration options of config.py are natively supported, though most could be hacked in,
-using $config_hash
 
 ## Dependencies
 `errbot` module depends on the following
