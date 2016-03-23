@@ -52,7 +52,7 @@ class errbot (
   $manage_python_dev   = true,
   $manage_virtualenv   = true,
   $python_version      = 'system',
-  $virtualenv_dir      = $::errbot::params::virtualenv_dir,
+  $virtualenv_dir      = '/opt/errbot',
 ) {
   include ::errbot::params
 
@@ -79,11 +79,9 @@ class errbot (
   # Configure errbot service
   include ::errbot::config::service
 
-  if defined($::errbot::config_file) {
+  if $::errbot::config_file {
     include ::errbot::config::config_file
   }
-
-  # Plugin Installation
 
   # Errbot Service
   service { 'errbot':
