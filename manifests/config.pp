@@ -37,7 +37,7 @@
 #
 # Example
 # -------
-# class errbot::config {
+# errbot::config {
 #   backend         => 'Slack',
 #   bot_admins      => ['@scary_admin'],
 #   bot_credentials => {
@@ -82,6 +82,11 @@ class errbot::config (
     ensure  => 'present',
     content => epp('errbot/config.py.epp'),
     owner   => $::errbot::bot_user,
+  }
+
+  file { $::errbot::config::data_dir:
+    ensure => 'directory',
+    owner  => $::errbot::bot_user,
   }
 
 }
