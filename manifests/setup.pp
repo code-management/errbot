@@ -28,14 +28,8 @@ class errbot::setup (
     }
   }
 
-  file { $::errbot::data_dir:
-    ensure => 'directory',
-    owner  => $::errbot::bot_user,
-  }
-
   if $::errbot::manage_python {
     class { '::python':
-      ensure     => 'present',
       version    => $::errbot::python_version,
       pip        => $::errbot::manage_pip,
       dev        => $::errbot::manage_python_dev,
