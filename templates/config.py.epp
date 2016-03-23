@@ -4,10 +4,10 @@ import logging
 # Core Err configuration                                                 #
 ##########################################################################
 
-BACKEND = '<%= $errbot::backend %>'
-STORAGE = '<%= $errbot::storage_type %>'
+BACKEND = '<%= $errbot::config::backend %>'
+STORAGE = '<%= $errbot::config::storage_type %>'
 # BOT_EXTRA_STORAGE_PLUGINS_DIR = None  # extra search path to find custom storage plugins
-BOT_DATA_DIR = '<%= $errbot::data_dir %>'
+BOT_DATA_DIR = '<%= $errbot::config::data_dir %>'
 
 ### Repos and plugins config.
 
