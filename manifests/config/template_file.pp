@@ -1,3 +1,14 @@
+# Class: errbot::config::template_file
+# ===========================
+#
+# Class writes errbot's config.py file from a user
+# specified parameters using a template.
+#
+# Should be considered private and not used directly.
+#
+# Parameters
+# ----------
+#
 class errbot::config::template_file (
 ) {
 
