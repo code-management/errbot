@@ -5,6 +5,8 @@
 # Allows a user to configure a basic errbot instance using Puppet
 # parameters.
 #
+# This class will attempt to install the dependencies for the passed backend.
+#
 # Parameters
 # ----------
 #
@@ -40,7 +42,7 @@
 #
 # Example
 # -------
-# errbot::config {
+# class { 'errbot::config':
 #   backend         => 'Slack',
 #   bot_admins      => ['@scary_admin'],
 #   bot_credentials => {
