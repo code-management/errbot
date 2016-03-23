@@ -77,7 +77,7 @@ BOT_ASYNC = True
 
 # The identity, or credentials, used to connect to a server
 BOT_IDENTITY = {
-    <% $::errbot::bot_credentials.each | String $key, String $value | { -%>
+    <% $::errbot::config::bot_credentials.each | String $key, String $value | { -%>
     '<%= $key %>': '<%= $value %>',
     <% } -%>
 }
@@ -88,7 +88,7 @@ BOT_IDENTITY = {
 # Unix-style glob patterns are supported, so 'gbin@localhost'
 # would be considered an admin if setting '*@localhost'.
 BOT_ADMINS = (
-    <% $::errbot::bot_admins.each | String $admin_user | { -%>
+    <% $::errbot::config::bot_admins.each | String $admin_user | { -%>
     '<%= $admin_user %>',
     <% } -%>
 )
@@ -104,7 +104,7 @@ CHATROOM_PRESENCE = ()
 # implementations, notably HipChat, are very picky about what name you
 # use. In the case of HipChat, make sure this matches exactly with the
 # name you gave the user.
-CHATROOM_FN = '<%= $errbot::bot_name %>'
+CHATROOM_FN = '<%= $errbot::config::bot_name %>'
 
 ##########################################################################
 # Prefix configuration                                                   #
