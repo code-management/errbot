@@ -13,9 +13,6 @@
 # [*bot_user*]
 #   Local system user underwhich to run the errbot instance. Default: errbot
 #
-# [*config_file*]
-#   An optional file reference to a Python config.py file. #TODO: dox correctly
-#
 # [*manage_bot_user*]
 #   Manage bot_user via Puppet. Default: true
 #
@@ -45,13 +42,12 @@
 class errbot (
   $additional_packages = [],
   $bot_user            = 'errbot',
-  $config_file         = undef,
   $manage_bot_user     = true,
   $manage_pip          = true,
   $manage_python       = true,
   $manage_python_dev   = true,
   $manage_virtualenv   = true,
-  $python_version      = 'system',
+  $python_version      = '3.4',
   $virtualenv_dir      = '/opt/errbot',
 ) {
   include ::errbot::params
@@ -63,11 +59,7 @@ class errbot (
   validate_bool($manage_pip)
   validate_bool($manage_virtualenv)
 
-  if defined(Class['::errbot::config']) and defined($::errbot::config_file) {
-    fail('The errbot::config class cannot be used when specifying a config file via the config_file parameter.')
-  }
-
-  Class['::errbot::setup'] -> Class['::errbot::install'] -> File["${::errbot::virtualenv_dir}/config.py"]
+  Class['::errbot::setup'] -> Class['::errbot::config'] -> Class['::errbot::install'] -> File["${::errbot::virtualenv_dir}/config.py"]
   Class['::errbot::config::service'] -> Service['errbot']
   File["${::errbot::virtualenv_dir}/config.py"] ~> Service['errbot']
   # Setup environment
@@ -79,9 +71,6 @@ class errbot (
   # Configure errbot service
   include ::errbot::config::service
 
-  if $::errbot::config_file {
-    include ::errbot::config::config_file
-  }
 
   # Errbot Service
   service { 'errbot':
