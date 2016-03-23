@@ -20,8 +20,8 @@ class errbot::install (
   }
 
   # Install backend dependencies, if any exist
-  if $::errbot::params::backend_dependencies {
-    python::pip { $::errbot::params::backend_dependencies:
+  if $::errbot::config::backend_dependencies{
+    python::pip { $::errbot::config::backend_dependencies:
       ensure     => 'present',
       virtualenv => $::errbot::virtualenv_dir,
       before     => Python::Pip['errbot'],
