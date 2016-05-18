@@ -1,5 +1,6 @@
 # Class: errbot::config::conf_file
 # ===========================
+group   => $::errbot::bot_user,
 #
 # Class writes errbot's config.py file from a user
 # specified file resource.
@@ -16,5 +17,6 @@ class errbot::config::conf_file (
     ensure => 'present',
     source => $::errbot::config_file,
     owner  => $::errbot::bot_user,
+    group  => $::errbot::bot_user,
   }
 }

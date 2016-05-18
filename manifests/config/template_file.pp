@@ -16,5 +16,6 @@ class errbot::config::template_file (
     ensure  => 'present',
     content => epp('errbot/config.py.epp'),
     owner   => $::errbot::bot_user,
+    group   => $::errbot::bot_user,
   }
 }
