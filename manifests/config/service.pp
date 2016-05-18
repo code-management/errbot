@@ -14,5 +14,9 @@ class errbot::config::service (
     ensure  => 'present',
     mode    => '0755',
     content => epp('errbot/errbot_init.epp'),
+  } ~>
+  exec { 'systemctl daemon-reload':
+    command     => '/bin/systemctl daemon-reload',
+    refreshonly => true,
   }
 }
