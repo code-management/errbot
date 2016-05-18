@@ -7,8 +7,8 @@
 # ----------
 #
 # [*additional_packages*]
-#   Any additonal pip packages you want to be installed into the
-#   virtualenv
+#   Any additonal pip packages to be installed into the errbot
+#   virtualenv, such as those to support your chosen backend. Default: []
 #
 # [*bot_user*]
 #   Local system user underwhich to run the errbot instance. Default: errbot
