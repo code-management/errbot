@@ -1,6 +1,5 @@
 # Class: errbot::config::conf_file
 # ===========================
-group   => $::errbot::bot_user,
 #
 # Class writes errbot's config.py file from a user
 # specified file resource.
