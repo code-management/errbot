@@ -52,10 +52,10 @@
 #
 
 class errbot::config (
-  $backend,
+  $backend             = undef,
   $bot_name            = 'errbot',
-  $bot_credentials,
-  $bot_admins,
+  $bot_credentials     = undef,
+  $bot_admins          = undef,
   $config_file         = undef,
   $data_dir            = '/opt/errbot/data',
   $storage_type        = 'Shelf',
