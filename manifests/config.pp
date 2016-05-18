@@ -119,6 +119,7 @@ class errbot::config (
   file { $::errbot::config::data_dir:
     ensure => 'directory',
     owner  => $::errbot::bot_user,
+    group  => $::errobt::bot_user
   }
 
 }
