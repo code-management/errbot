@@ -87,7 +87,7 @@ class errbot::config (
   } else {
 
     notify {'Writing config.py with passed config_file':}
-    include ::errbot::config::config_file
+    include ::errbot::config::conf_file
 
   }
 
