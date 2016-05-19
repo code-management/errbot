@@ -1,6 +1,6 @@
 {
   "name": "codemanagement-errbot",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "author": "codemanagement",
   "summary": "Deploy & manage errbot with Puppet",
   "license": "Apache-2.0",
