@@ -5,6 +5,7 @@
 # and Pip if required, and creating a virtualenv.
 #
 # Also handles creation of bot_user, if manage_user is true.
+# Should be considered private and not used directly.
 #
 # Parameters
 # ----------
@@ -18,7 +19,7 @@ class errbot::setup (
     }
   }
 
-  if $::errbot::manage_user {
+  if $::errbot::manage_bot_user {
     user { $::errbot::bot_user:
       ensure     => 'present',
       managehome => true,
@@ -27,14 +28,8 @@ class errbot::setup (
     }
   }
 
-  file { $::errbot::data_dir:
-    ensure => 'directory',
-    owner  => $::errbot::bot_user,
-  }
-
   if $::errbot::manage_python {
     class { '::python':
-      ensure     => 'present',
       version    => $::errbot::python_version,
       pip        => $::errbot::manage_pip,
       dev        => $::errbot::manage_python_dev,

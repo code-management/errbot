@@ -1,6 +1,6 @@
 {
   "name": "codemanagement-errbot",
-  "version": "0.0.1",
+  "version": "0.1.2",
   "author": "codemanagement",
   "summary": "Deploy & manage errbot with Puppet",
   "license": "Apache-2.0",
@@ -10,11 +10,11 @@
   "dependencies": [
     {
       "name": "puppetlabs-stdlib",
-      "version_requirement": ">= 1.0.0"
+      "version_requirement": ">= 4.6.0"
     },
     {
       "name": "stankevich-python",
-      "version_requirement": ">= 1.9.0"
+      "version_requirement": ">= 1.12.0"
     }
   ],
   "operatingsystem_support": [
